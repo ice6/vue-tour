@@ -15,10 +15,10 @@
 
     <slot name="actions">
       <div class="v-step__buttons">
-        <button @click.prevent="stop" v-if="!isLast" class="v-step__button">Skip tour</button>
-        <button @click.prevent="previousStep" v-if="!isFirst" class="v-step__button">Previous</button>
-        <button @click.prevent="nextStep" v-if="!isLast" class="v-step__button">Next</button>
-        <button @click.prevent="stop" v-if="isLast" class="v-step__button">Finish</button>
+        <button @click.prevent="stop" v-if="!isLast" class="v-step__button">{{step.skipTourText ? step.skipTourText : 'Ship Tour'}}</button>
+        <button @click.prevent="previousStep" v-if="!isFirst" class="v-step__button">{{ step.previousText ? step.previousText : 'Previous'}}</button>
+        <button @click.prevent="nextStep" v-if="!isLast" class="v-step__button">{{step.nextText ? step.nextText : 'Next'}}</button>
+        <button @click.prevent="stop" v-if="isLast" class="v-step__button">{{step.finishText ? step.finishText : 'Finish'}}</button>
       </div>
     </slot>
 
@@ -76,7 +76,7 @@ export default {
       // console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
 
       if (targetElement) {
-        targetElement.scrollIntoView({behavior: 'smooth'})
+        targetElement.scrollIntoView({ behavior: 'smooth' })
 
         /* eslint-disable no-new */
         this._data._popper = new Popper(
